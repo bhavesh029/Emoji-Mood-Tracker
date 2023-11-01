@@ -17,7 +17,6 @@ export * from "./constants/error-messages";
 export * from "./models/status-codes";
 export * from "./models/mw-user-info";
 export * from "./constants/deal-constants";
-export * from "./constants/service-location-type";
 export * from "./constants/http-response-header-constants";
 
 export * from "./utils/id-generators";

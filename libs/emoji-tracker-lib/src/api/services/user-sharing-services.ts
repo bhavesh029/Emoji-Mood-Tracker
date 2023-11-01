@@ -1,5 +1,4 @@
 import {
-  MoodStats,
   MwDbContext,
   ValidationErrRes,
   getSharingData,
@@ -7,7 +6,6 @@ import {
 } from "@emojiTracker-js/data-access";
 import { env } from "@emojiTracker-js/milkyway-common";
 import { AES, enc as cryptoJSEnc } from "crypto-js";
-import * as axios from "axios";
 import { emojitrackerBaseUrl } from "../emoji-tracker-lib-api-info";
 
 export function encryptData(data: string): string {
