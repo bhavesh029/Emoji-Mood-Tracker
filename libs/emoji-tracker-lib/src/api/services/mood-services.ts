@@ -4,6 +4,8 @@ import {
   UnsupportedFilterErrRes,
   createMood,
   deleteMood,
+  getAllMonthMoodData,
+  getAllTodayMoodData,
   getMonthlyMoodData,
   updateTodayMood,
 } from "@emojiTracker-js/data-access";
@@ -38,4 +40,14 @@ export function getMoodData(
     return UnsupportedFilterErrRes();
   }
   return getMonthlyMoodData(ctx, userId, val);
+}
+
+export function getPublicMoodData(ctx: MwDbContext, filter: string) {
+  if (filter == "today") {
+    return getAllTodayMoodData(ctx);
+  } else if (filter == "this-month") {
+    return getAllMonthMoodData(ctx);
+  } else {
+    return UnsupportedFilterErrRes();
+  }
 }

@@ -16,6 +16,8 @@ import { UpdateMoodController } from './controllers/moods/update-mood-controller
 import { GetSharedDataController } from './controllers/sharing/get-shared-data-controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ShareUserDataController } from './controllers/sharing/share-user-data-controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { GetPublicMoodController } from './controllers/public/get-public-mood-controller';
 import type { RequestHandler, Router } from 'express';
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -247,6 +249,31 @@ export function RegisterRoutes(app: Router) {
                 validatedArgs = getValidatedArgs(args, request, response);
 
                 const controller = new ShareUserDataController();
+
+
+              const promise = controller.handlerFunc.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/v1/public/mood',
+            ...(fetchMiddlewares<RequestHandler>(GetPublicMoodController)),
+            ...(fetchMiddlewares<RequestHandler>(GetPublicMoodController.prototype.handlerFunc)),
+
+            function GetPublicMoodController_handlerFunc(request: any, response: any, next: any) {
+            const args = {
+                    filter: {"in":"query","name":"filter","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new GetPublicMoodController();
 
 
               const promise = controller.handlerFunc.apply(controller, validatedArgs as any);

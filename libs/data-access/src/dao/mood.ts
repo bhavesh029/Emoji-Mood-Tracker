@@ -90,3 +90,56 @@ export function getMonthlyMoodData(
       });
     });
 }
+
+export function getAllTodayMoodData(ctx: MwDbContext) {
+  return ctx.conn
+    .query(
+      `SELECT
+  emoji,
+  COUNT(*) AS mood_count
+FROM
+  ${ctx.dbSchema}.moods
+WHERE
+  DATE(created_timestamp) = CURRENT_DATE
+GROUP BY emoji`,
+      { type: QueryTypes.SELECT }
+    )
+    .then((res) => handleFindAllWithEmpty(res))
+    .then((returnVal) => {
+      return returnVal.map((res) => {
+        let mapInfo: MoodStats = {
+          emoji: res["emoji"],
+          moodCounts: res["mood_counts"],
+        };
+
+        return mapInfo;
+      });
+    });
+}
+
+export function getAllMonthMoodData(ctx: MwDbContext) {
+  return ctx.conn
+    .query(
+      `    SELECT
+  emoji,
+  COUNT(*) AS mood_count
+FROM
+  ${ctx.dbSchema}.moods
+WHERE
+  DATE_TRUNC('month', created_timestamp) = DATE_TRUNC('month', CURRENT_DATE)
+GROUP BY
+  emoji;`,
+      { type: QueryTypes.SELECT }
+    )
+    .then((res) => handleFindAllWithEmpty(res))
+    .then((returnVal) => {
+      return returnVal.map((res) => {
+        let mapInfo: MoodStats = {
+          emoji: res["emoji"],
+          moodCounts: res["mood_counts"],
+        };
+
+        return mapInfo;
+      });
+    });
+}

@@ -144,7 +144,7 @@
 						"description": "No content"
 					}
 				},
-				"summary": "create new user's mood",
+				"summary": "create new user's mood\nCan Only Add These Moods 😀 😢 😡 😔 😍",
 				"tags": [
 					"Moods"
 				],
@@ -382,6 +382,38 @@
 							"type": "string"
 						}
 					},
+					{
+						"in": "query",
+						"name": "filter",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/public/mood": {
+			"get": {
+				"operationId": "HandlerFunc",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessResponse_MoodStats-Array_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "get public mood\nfilter with this-month, today",
+				"tags": [
+					"Public"
+				],
+				"security": [],
+				"parameters": [
 					{
 						"in": "query",
 						"name": "filter",

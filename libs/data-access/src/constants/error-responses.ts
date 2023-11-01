@@ -62,14 +62,6 @@ export function UnsupportedFilterErrRes() {
   );
 }
 
-export function NoLocationTagFoundErrRes() {
-  return Promise.reject(
-    prepareErrorRes(InvalidInputStatus.code, {
-      error: { msg: "Tag is required" },
-    })
-  );
-}
-
 export function VerificationFailedErrRes(msg: string): Promise<never> {
   return Promise.reject(
     prepareErrorRes(BadRequestFailedStatus.code, {
@@ -92,17 +84,7 @@ export function DuplicateAuthzKeyFoundErrRes() {
   );
 }
 
-export function AuthzKeyPermissionNotSetErrRes() {
-  return Promise.reject(new Error("Authz Permissions are not set"));
-}
 
-export function InvalidOrExpiredTokenErrRes() {
-  return Promise.reject(
-    prepareErrorRes(UnauthorizedStatus.code, {
-      error: { msg: prepMsg(UnauthorizedErrMsg, InvalidOrExpiredTokenErrMsg) },
-    })
-  );
-}
 
 export function DataNotMatchErrRes(errorMsg: string, state: string) {
   return Promise.reject(

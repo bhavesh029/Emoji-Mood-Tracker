@@ -2,6 +2,7 @@
 import {
   CreatedSuccessfullyStatus,
   MoodInfo,
+  UnsupportedFilterErrRes,
   generateMoodId,
 } from "@emojiTracker-js/data-access";
 import { RestrictedBaseController } from "@emojiTracker-js/milkyway-common";
@@ -9,6 +10,7 @@ import { Body, Header, Post, Route, Tags } from "@tsoa/runtime";
 import * as dotenv from "dotenv";
 import { AddMoodReqBody } from "../../models/add-mood-req-body";
 import { addMood } from "../../services/mood-services";
+import { moods } from "../constants/mood-contant";
 
 dotenv.config();
 
@@ -25,6 +27,7 @@ export class AddMoodController extends RestrictedBaseController<void> {
   /**
    *
    * @summary create new user's mood
+   * Can Only Add These Moods 😀 😢 😡 😔 😍
    *
    */
   @Post("/{userId}/mood")
@@ -40,7 +43,11 @@ export class AddMoodController extends RestrictedBaseController<void> {
         mood: reqBody.mood,
         note: reqBody.note,
       };
-      return addMood(this.mwCtx, userInfo);
+      if (moods.includes(reqBody.mood)) {
+        return addMood(this.mwCtx, userInfo);
+      } else {
+        return UnsupportedFilterErrRes();
+      }
     }).then(this.returnNoContent());
   }
 }
