@@ -10,11 +10,11 @@ CREATE TABLE users (
 
 -- Create the Moods table
 CREATE TABLE moods (
-    id SERIAL PRIMARY KEY,
+    id VARCHAR(25) PRIMARY KEY,
     userId VARCHAR REFERENCES Users(id),
     emoji VARCHAR(10) NOT NULL,
     note TEXT,
-    timestamp TIMESTAMP NOT NULL,
-    updated_timestamp TIMESTAMP NOT NULL
+    created_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_DATE,
+    updated_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_DATE
 );
 

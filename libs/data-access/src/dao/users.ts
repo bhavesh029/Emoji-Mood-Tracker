@@ -10,7 +10,7 @@ export function createUser(
 ): Promise<number> {
   return ctx.conn
     .query(
-      `INSERT INTO emoji_tracker_app.users
+      `INSERT INTO ${ctx.dbSchema}.users
     (id, username, email)
     VALUES('${userId}', '${userName}', '${email}');
     `

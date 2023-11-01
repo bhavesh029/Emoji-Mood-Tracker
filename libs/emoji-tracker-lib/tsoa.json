@@ -25,7 +25,8 @@
   "entryFile": "apps/emoji-tracker/src/app/main.ts",
   "noImplicitAdditionalProperties": "throw-on-extras",
   "controllerPathGlobs": [
-    "libs/emoji-tracker-lib/src/api/controllers/users/*.ts"
+    "libs/emoji-tracker-lib/src/api/controllers/users/*.ts",
+    "libs/emoji-tracker-lib/src/api/controllers/moods/*.ts"
   ],
   "compilerOptions": {
     "baseUrl": ".",

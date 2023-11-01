@@ -20,6 +20,20 @@
 					"username"
 				],
 				"type": "object"
+			},
+			"AddMoodReqBody": {
+				"properties": {
+					"note": {
+						"type": "string"
+					},
+					"mood": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"mood"
+				],
+				"type": "object"
 			}
 		},
 		"securitySchemes": {}
@@ -34,8 +48,8 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/users/user/add": {
-			"put": {
+		"/users/create": {
+			"post": {
 				"operationId": "HandlerFunc",
 				"responses": {
 					"204": {
@@ -54,6 +68,41 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/AddUserReqBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/{userId}/mood": {
+			"post": {
+				"operationId": "HandlerFunc",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"summary": "create new user",
+				"tags": [
+					"Moods"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddMoodReqBody"
 							}
 						}
 					}

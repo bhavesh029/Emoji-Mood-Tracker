@@ -10,10 +10,10 @@ export function generateUserId() {
     length: 6,
     dictionary: "number",
   });
-  return "P" + codePrefix().replace(/(.{3})/g, "$1-") + codeSuffix();
+  return "U" + codePrefix().replace(/(.{3})/g, "$1-") + codeSuffix();
 }
 
-export function generateCustomerId() {
+export function generateMoodId() {
   const codePrefix = new ShortUniqueId({
     length: 5,
     dictionary: "alpha_upper",
@@ -23,25 +23,5 @@ export function generateCustomerId() {
     length: 6,
     dictionary: "number",
   });
-  return "C" + codePrefix().replace(/(.{3})/g, "$1-") + codeSuffix();
-}
-
-export function generateShopId() {
-  const codePrefix = new ShortUniqueId({
-    length: 4,
-    dictionary: "alpha_upper",
-  });
-
-  const codeSuffix = new ShortUniqueId({
-    length: 6,
-    dictionary: "number",
-  });
-  return "SH-" + codePrefix().replace(/(.{3})/g, "$1-") + codeSuffix();
-}
-
-export function generateJoiningCode(): string {
-  return new ShortUniqueId({
-    length: 6,
-    dictionary: "alphanum_upper",
-  })();
+  return "M" + codePrefix().replace(/(.{3})/g, "$1-") + codeSuffix();
 }

@@ -1,7 +1,9 @@
 /* eslint-disable promise/no-nesting */
 import {
   CreatedSuccessfullyStatus,
+  MoodCreateInfo,
   UsersCreationAttributes,
+  generateMoodId,
   generateUserId,
 } from "@emojiTracker-js/data-access";
 import { UnRestrictedBaseController } from "@emojiTracker-js/milkyway-common";
@@ -9,15 +11,17 @@ import { Body, Post, Route, Tags } from "@tsoa/runtime";
 import * as dotenv from "dotenv";
 import { AddUserReqBody } from "../../models/add-user-req-body";
 import { addUser } from "../../services/user-services";
+import { AddMoodReqBody } from "../../models/add-mood-req-body";
+import { addMood } from "../../services/mood-services";
 
 dotenv.config();
 
 @Route(`/users`)
-@Tags("Users")
+@Tags("Moods")
 /**
  * Handle all the details about the partner
  */
-export class AddUserController extends UnRestrictedBaseController<void> {
+export class AddMoodController extends UnRestrictedBaseController<void> {
   override successStatusCode = CreatedSuccessfullyStatus;
   constructor() {
     super();
@@ -27,17 +31,18 @@ export class AddUserController extends UnRestrictedBaseController<void> {
    * @summary create new user
    *
    */
-  @Post("/create")
-  handlerFunc(@Body() info: AddUserReqBody): Promise<void> {
+  @Post("/{userId}/mood")
+  handlerFunc(userId: string, @Body() reqBody: AddMoodReqBody): Promise<void> {
     return this.controllerWrapper(() => {
-      const userInfo: UsersCreationAttributes = {
-        id: generateUserId(),
-        username: info.username,
-        email: info.email,
+      const userInfo: MoodCreateInfo = {
+        moodId: generateMoodId(),
+        userId: userId,
+        mood: reqBody.mood,
+        note: reqBody.note,
       };
-      return addUser(this.mwCtx, userInfo);
+      return addMood(this.mwCtx, userInfo);
     }).then(this.returnNoContent());
   }
 }
 
-export default AddUserController;
+export default AddMoodController;
