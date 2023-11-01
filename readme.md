@@ -1,5 +1,18 @@
 # Emoji-Mood-Tracker
 
+##Prerequisite
+```
+Docker should be installed
+node should be installed
+```
+
+##Getting Started
+```
+npm i 
+create .env in root folder
+copy test.env content inside .env
+npm run setup-docker
+```
 ## Setup Project
 ### Environmental setup
 1. Add database url in `.env` file, the file should be present at the root
@@ -16,27 +29,11 @@ npm run build-routes
 ```
 
 
-
-### emoji-tracker
-#### Build emoji-trackers Spec & Routes | Start emoji-tracker Service
-```sh
-npm run build-start-emoji-tracker
-```
-
-#### Build emoji-trackers Spec & Routes
-```sh
-npm run build-emoji-tracker-routes
-```
-
 #### Start emoji-tracker Service
 ```sh
-npm run start-emoji-tracker
+npm run start-server
 ```
 
-#### Migrate Database
-```sh
-sh scripts/deploy/database/migrate-db.sh
-```
 
 ## Links
 Open API: 
