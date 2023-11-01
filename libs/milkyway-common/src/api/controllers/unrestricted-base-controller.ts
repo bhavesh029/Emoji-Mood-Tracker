@@ -1,8 +1,4 @@
-import {
-  SuccessResponse,
-  handleSuccess,
-  StateSuccessResponse,
-} from "@emojiTracker-js/data-access";
+import { SuccessResponse, handleSuccess } from "@emojiTracker-js/data-access";
 import { BaseController } from "./base-controller";
 
 export abstract class UnRestrictedBaseController<T> extends BaseController {

@@ -5,8 +5,9 @@ set schema '$schema';
 CREATE TABLE users (
     id VARCHAR(25) PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    sharing_enabled bool DEFAULT true
+    email VARCHAR(100) NOT NULL UNIQUE,
+    sharing_enabled bool DEFAULT true,
+    token varchar NOT NULL
 );
 
 -- Create the Moods table

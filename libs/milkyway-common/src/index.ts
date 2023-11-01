@@ -15,3 +15,4 @@ export * from "./api/authz/pincode-constants";
 export * from "./utils/env-utils";
 
 export * from "./api/controllers/unrestricted-base-controller";
+export * from "./api/controllers/restricted-base-controller";

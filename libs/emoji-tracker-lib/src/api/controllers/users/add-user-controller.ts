@@ -1,7 +1,9 @@
 /* eslint-disable promise/no-nesting */
 import {
-  CreatedSuccessfullyStatus,
+  SuccessResponse,
   UsersCreationAttributes,
+  WithContentStatus,
+  encryptData,
   generateUserId,
 } from "@emojiTracker-js/data-access";
 import { UnRestrictedBaseController } from "@emojiTracker-js/milkyway-common";
@@ -17,8 +19,8 @@ dotenv.config();
 /**
  * Handle all the details about the partner
  */
-export class AddUserController extends UnRestrictedBaseController<void> {
-  override successStatusCode = CreatedSuccessfullyStatus;
+export class AddUserController extends UnRestrictedBaseController<string> {
+  override successStatusCode = WithContentStatus;
   constructor() {
     super();
   }
@@ -28,15 +30,17 @@ export class AddUserController extends UnRestrictedBaseController<void> {
    *
    */
   @Post("/create")
-  handlerFunc(@Body() info: AddUserReqBody): Promise<void> {
+  handlerFunc(@Body() info: AddUserReqBody): Promise<SuccessResponse<string>> {
     return this.controllerWrapper(() => {
+      const id = generateUserId();
       const userInfo: UsersCreationAttributes = {
-        id: generateUserId(),
+        id: id,
         username: info.username,
         email: info.email,
+        token: encryptData(id),
       };
       return addUser(this.mwCtx, userInfo);
-    }).then(this.returnNoContent());
+    });
   }
 }
 

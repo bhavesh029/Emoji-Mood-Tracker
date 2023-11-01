@@ -21,8 +21,7 @@ export * from "./constants/http-response-header-constants";
 
 export * from "./utils/id-generators";
 export * from "./utils/unique-id-conflict-util";
-
-export * from "./extensions/date.extensions";
+export * from "./utils/session-utils";
 
 export * from "./dao/users";
 export * from "./dao/mood";

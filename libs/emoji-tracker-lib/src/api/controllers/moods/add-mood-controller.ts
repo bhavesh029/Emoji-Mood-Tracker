@@ -2,15 +2,11 @@
 import {
   CreatedSuccessfullyStatus,
   MoodInfo,
-  UsersCreationAttributes,
   generateMoodId,
-  generateUserId,
 } from "@emojiTracker-js/data-access";
-import { UnRestrictedBaseController } from "@emojiTracker-js/milkyway-common";
-import { Body, Post, Route, Tags } from "@tsoa/runtime";
+import { RestrictedBaseController } from "@emojiTracker-js/milkyway-common";
+import { Body, Header, Post, Route, Tags } from "@tsoa/runtime";
 import * as dotenv from "dotenv";
-import { AddUserReqBody } from "../../models/add-user-req-body";
-import { addUser } from "../../services/user-services";
 import { AddMoodReqBody } from "../../models/add-mood-req-body";
 import { addMood } from "../../services/mood-services";
 
@@ -21,7 +17,7 @@ dotenv.config();
 /**
  * Handle all the details about the User's Mood
  */
-export class AddMoodController extends UnRestrictedBaseController<void> {
+export class AddMoodController extends RestrictedBaseController<void> {
   override successStatusCode = CreatedSuccessfullyStatus;
   constructor() {
     super();
@@ -32,8 +28,12 @@ export class AddMoodController extends UnRestrictedBaseController<void> {
    *
    */
   @Post("/{userId}/mood")
-  handlerFunc(userId: string, @Body() reqBody: AddMoodReqBody): Promise<void> {
-    return this.controllerWrapper(() => {
+  handlerFunc(
+    @Header("X-Access-Token") token: string,
+    userId: string,
+    @Body() reqBody: AddMoodReqBody
+  ): Promise<void> {
+    return this.controllerWrapper({ token, userId }, () => {
       const userInfo: MoodInfo = {
         moodId: generateMoodId(),
         userId: userId,

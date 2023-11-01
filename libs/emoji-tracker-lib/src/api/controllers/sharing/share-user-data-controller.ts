@@ -3,8 +3,11 @@ import {
   SuccessResponse,
   WithContentStatus,
 } from "@emojiTracker-js/data-access";
-import { UnRestrictedBaseController } from "@emojiTracker-js/milkyway-common";
-import { Get, Query, Route, Tags } from "@tsoa/runtime";
+import {
+  RestrictedBaseController,
+  UnRestrictedBaseController,
+} from "@emojiTracker-js/milkyway-common";
+import { Get, Header, Query, Route, Tags } from "@tsoa/runtime";
 import * as dotenv from "dotenv";
 import { createHashAndInsertData } from "../../services/user-sharing-services";
 
@@ -15,7 +18,7 @@ dotenv.config();
 /**
  * Handle all the details about the User's Mood
  */
-export class ShareUserDataController extends UnRestrictedBaseController<string> {
+export class ShareUserDataController extends RestrictedBaseController<string> {
   override successStatusCode = WithContentStatus;
   constructor() {
     super();
@@ -28,10 +31,11 @@ export class ShareUserDataController extends UnRestrictedBaseController<string> 
    */
   @Get("/{userId}/share/mood")
   handlerFunc(
+    @Header("X-Access-Token") token: string,
     userId: string,
     @Query() filter: string
   ): Promise<SuccessResponse<string>> {
-    return this.controllerWrapper(() => {
+    return this.controllerWrapper({ token, userId }, () => {
       return createHashAndInsertData(this.mwCtx, userId, filter);
     });
   }

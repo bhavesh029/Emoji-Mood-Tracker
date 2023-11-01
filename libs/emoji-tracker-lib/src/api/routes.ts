@@ -21,6 +21,14 @@ import type { RequestHandler, Router } from 'express';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
+    "SuccessResponse_string_": {
+        "dataType": "refObject",
+        "properties": {
+            "response": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AddUserReqBody": {
         "dataType": "refAlias",
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"email":{"dataType":"string","required":true},"username":{"dataType":"string","required":true}},"validators":{}},
@@ -48,14 +56,6 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "response": {"dataType":"any","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "SuccessResponse_string_": {
-        "dataType": "refObject",
-        "properties": {
-            "response": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -101,6 +101,7 @@ export function RegisterRoutes(app: Router) {
 
             function AddMoodController_handlerFunc(request: any, response: any, next: any) {
             const args = {
+                    token: {"in":"header","name":"X-Access-Token","required":true,"dataType":"string"},
                     userId: {"in":"path","name":"userId","required":true,"dataType":"string"},
                     reqBody: {"in":"body","name":"reqBody","required":true,"ref":"AddMoodReqBody"},
             };
@@ -127,6 +128,7 @@ export function RegisterRoutes(app: Router) {
 
             function DeleteMoodController_handlerFunc(request: any, response: any, next: any) {
             const args = {
+                    token: {"in":"header","name":"X-Access-Token","required":true,"dataType":"string"},
                     userId: {"in":"path","name":"userId","required":true,"dataType":"string"},
                     moodId: {"in":"query","name":"moodId","required":true,"dataType":"string"},
             };
@@ -153,6 +155,7 @@ export function RegisterRoutes(app: Router) {
 
             function GetMonthlyMoodDataController_handlerFunc(request: any, response: any, next: any) {
             const args = {
+                    token: {"in":"header","name":"X-Access-Token","required":true,"dataType":"string"},
                     userId: {"in":"path","name":"userId","required":true,"dataType":"string"},
                     filter: {"in":"query","name":"filter","required":true,"dataType":"string"},
             };
@@ -179,6 +182,7 @@ export function RegisterRoutes(app: Router) {
 
             function UpdateMoodController_handlerFunc(request: any, response: any, next: any) {
             const args = {
+                    token: {"in":"header","name":"X-Access-Token","required":true,"dataType":"string"},
                     userId: {"in":"path","name":"userId","required":true,"dataType":"string"},
                     reqBody: {"in":"body","name":"reqBody","required":true,"ref":"AddMoodReqBody"},
                     moodId: {"in":"query","name":"moodId","required":true,"dataType":"string"},
@@ -231,6 +235,7 @@ export function RegisterRoutes(app: Router) {
 
             function ShareUserDataController_handlerFunc(request: any, response: any, next: any) {
             const args = {
+                    token: {"in":"header","name":"X-Access-Token","required":true,"dataType":"string"},
                     userId: {"in":"path","name":"userId","required":true,"dataType":"string"},
                     filter: {"in":"query","name":"filter","required":true,"dataType":"string"},
             };

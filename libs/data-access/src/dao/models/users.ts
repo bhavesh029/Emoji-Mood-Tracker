@@ -8,6 +8,7 @@ export interface UsersAttributes {
   username: string;
   email: string;
   sharingEnabled?: boolean;
+  token: string;
 }
 
 export type UsersPk = "id";
@@ -20,6 +21,7 @@ export class Users extends Model<UsersAttributes, UsersCreationAttributes> imple
   username!: string;
   email!: string;
   sharingEnabled?: boolean;
+  token!: string;
 
   // Users hasMany Moods via userid
   moods!: Moods[];
@@ -59,19 +61,31 @@ export class Users extends Model<UsersAttributes, UsersCreationAttributes> imple
     },
     email: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: false,
+      unique: "users_email_key"
     },
     sharingEnabled: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
       defaultValue: true,
       field: 'sharing_enabled'
+    },
+    token: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     sequelize,
     tableName: 'users',
     timestamps: false,
     indexes: [
+      {
+        name: "users_email_key",
+        unique: true,
+        fields: [
+          { name: "email" },
+        ]
+      },
       {
         name: "users_pkey",
         unique: true,

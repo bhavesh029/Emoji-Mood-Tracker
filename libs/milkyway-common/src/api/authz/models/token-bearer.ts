@@ -1,4 +1,4 @@
 export type TokenBearer = {
   token: string;
-  userId?: string;
+  userId: string;
 };

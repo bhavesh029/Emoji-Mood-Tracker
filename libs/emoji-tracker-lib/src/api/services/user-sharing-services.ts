@@ -1,24 +1,12 @@
 import {
   MwDbContext,
   ValidationErrRes,
+  decryptData,
+  encryptData,
   getSharingData,
   insertShareData,
 } from "@emojiTracker-js/data-access";
-import { env } from "@emojiTracker-js/milkyway-common";
-import { AES, enc as cryptoJSEnc } from "crypto-js";
 import { emojitrackerBaseUrl } from "../emoji-tracker-lib-api-info";
-
-export function encryptData(data: string): string {
-  const encrypted = AES.encrypt(data, env("AES_KEY")).toString();
-  return encrypted;
-}
-
-export function decryptData(data: string) {
-  const decryptData = AES.decrypt(data, env("AES_KEY"));
-  const original = decryptData.toString(cryptoJSEnc.Utf8);
-  console.log("decryptData", original);
-  return original;
-}
 
 export function createHashAndInsertData(
   ctx: MwDbContext,

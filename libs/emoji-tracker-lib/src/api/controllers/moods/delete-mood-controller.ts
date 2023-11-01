@@ -1,13 +1,9 @@
 /* eslint-disable promise/no-nesting */
-import {
-  CreatedSuccessfullyStatus,
-  MoodInfo,
-} from "@emojiTracker-js/data-access";
-import { UnRestrictedBaseController } from "@emojiTracker-js/milkyway-common";
-import { Body, Delete, Put, Query, Route, Tags } from "@tsoa/runtime";
+import { CreatedSuccessfullyStatus } from "@emojiTracker-js/data-access";
+import { RestrictedBaseController } from "@emojiTracker-js/milkyway-common";
+import { Delete, Header, Query, Route, Tags } from "@tsoa/runtime";
 import * as dotenv from "dotenv";
-import { AddMoodReqBody } from "../../models/add-mood-req-body";
-import { removeMood, updateMood } from "../../services/mood-services";
+import { removeMood } from "../../services/mood-services";
 
 dotenv.config();
 
@@ -16,7 +12,7 @@ dotenv.config();
 /**
  * Handle all the details about the User's Mood
  */
-export class DeleteMoodController extends UnRestrictedBaseController<void> {
+export class DeleteMoodController extends RestrictedBaseController<void> {
   override successStatusCode = CreatedSuccessfullyStatus;
   constructor() {
     super();
@@ -27,8 +23,12 @@ export class DeleteMoodController extends UnRestrictedBaseController<void> {
    *
    */
   @Delete("/{userId}/mood")
-  handlerFunc(userId: string, @Query() moodId: string): Promise<void> {
-    return this.controllerWrapper(() => {
+  handlerFunc(
+    @Header("X-Access-Token") token: string,
+    userId: string,
+    @Query() moodId: string
+  ): Promise<void> {
+    return this.controllerWrapper({ token, userId }, () => {
       return removeMood(this.mwCtx, userId, moodId);
     }).then(this.returnNoContent());
   }
