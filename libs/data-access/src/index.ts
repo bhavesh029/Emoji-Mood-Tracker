@@ -27,8 +27,10 @@ export * from "./extensions/date.extensions";
 
 export * from "./dao/users";
 export * from "./dao/mood";
+export * from "./dao/user-sharing";
 
 // Models
 
 export * from "./dao/models/users";
 export * from "./dao/models/moods";
+export * from "./dao/models/user-sharing";

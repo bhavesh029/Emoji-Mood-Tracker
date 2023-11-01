@@ -26,7 +26,8 @@
   "noImplicitAdditionalProperties": "throw-on-extras",
   "controllerPathGlobs": [
     "libs/emoji-tracker-lib/src/api/controllers/users/*.ts",
-    "libs/emoji-tracker-lib/src/api/controllers/moods/*.ts"
+    "libs/emoji-tracker-lib/src/api/controllers/moods/*.ts",
+    "libs/emoji-tracker-lib/src/api/controllers/sharing/*.ts"
   ],
   "compilerOptions": {
     "baseUrl": ".",

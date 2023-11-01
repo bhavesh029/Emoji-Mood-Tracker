@@ -12,6 +12,10 @@ import { DeleteMoodController } from './controllers/moods/delete-mood-controller
 import { GetMonthlyMoodDataController } from './controllers/moods/get-monthly-mood-data-controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { UpdateMoodController } from './controllers/moods/update-mood-controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { GetSharedDataController } from './controllers/sharing/get-shared-data-controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { ShareUserDataController } from './controllers/sharing/share-user-data-controller';
 import type { RequestHandler, Router } from 'express';
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -36,6 +40,22 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "response": {"dataType":"array","array":{"dataType":"refAlias","ref":"MoodStats"},"required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "SuccessResponse_any_": {
+        "dataType": "refObject",
+        "properties": {
+            "response": {"dataType":"any","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "SuccessResponse_string_": {
+        "dataType": "refObject",
+        "properties": {
+            "response": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -171,6 +191,57 @@ export function RegisterRoutes(app: Router) {
                 validatedArgs = getValidatedArgs(args, request, response);
 
                 const controller = new UpdateMoodController();
+
+
+              const promise = controller.handlerFunc.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/v1/users/share/:hash',
+            ...(fetchMiddlewares<RequestHandler>(GetSharedDataController)),
+            ...(fetchMiddlewares<RequestHandler>(GetSharedDataController.prototype.handlerFunc)),
+
+            function GetSharedDataController_handlerFunc(request: any, response: any, next: any) {
+            const args = {
+                    hash: {"in":"path","name":"hash","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new GetSharedDataController();
+
+
+              const promise = controller.handlerFunc.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/v1/users/:userId/share/mood',
+            ...(fetchMiddlewares<RequestHandler>(ShareUserDataController)),
+            ...(fetchMiddlewares<RequestHandler>(ShareUserDataController.prototype.handlerFunc)),
+
+            function ShareUserDataController_handlerFunc(request: any, response: any, next: any) {
+            const args = {
+                    userId: {"in":"path","name":"userId","required":true,"dataType":"string"},
+                    filter: {"in":"query","name":"filter","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new ShareUserDataController();
 
 
               const promise = controller.handlerFunc.apply(controller, validatedArgs as any);
