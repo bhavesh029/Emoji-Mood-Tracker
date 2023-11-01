@@ -1,4 +1,4 @@
-# emojiTracker JS
+# Emoji-Mood-Tracker
 
 ## Setup Project
 ### Environmental setup
