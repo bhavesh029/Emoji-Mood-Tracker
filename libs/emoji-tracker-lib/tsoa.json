@@ -29,7 +29,8 @@
     "libs/emoji-tracker-lib/src/api/controllers/moods/*.ts",
     "libs/emoji-tracker-lib/src/api/controllers/sharing/*.ts",
     "libs/emoji-tracker-lib/src/api/controllers/public/*.ts",
-    "libs/emoji-tracker-lib/src/api/controllers/statistics/*.ts"
+    "libs/emoji-tracker-lib/src/api/controllers/statistics/*.ts",
+    "libs/emoji-tracker-lib/src/api/controllers/suggestions/*.ts"
   ],
   "compilerOptions": {
     "baseUrl": ".",

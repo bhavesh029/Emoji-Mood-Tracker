@@ -20,6 +20,8 @@ import { ShareUserDataController } from './controllers/sharing/share-user-data-c
 import { GetPublicMoodController } from './controllers/public/get-public-mood-controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { GetUserEmojiUsageStatisticsController } from './controllers/statistics/get-user-emoji-usage-statistics-controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { GetEmojiSuggestionsController } from './controllers/suggestions/get-emoji-suggestions-controller';
 import type { RequestHandler, Router } from 'express';
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -60,6 +62,14 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "response": {"dataType":"any","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "SuccessResponse_string-or-undefined_": {
+        "dataType": "refObject",
+        "properties": {
+            "response": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"undefined"}],"required":true},
         },
         "additionalProperties": false,
     },
@@ -303,6 +313,33 @@ export function RegisterRoutes(app: Router) {
                 validatedArgs = getValidatedArgs(args, request, response);
 
                 const controller = new GetUserEmojiUsageStatisticsController();
+
+
+              const promise = controller.handlerFunc.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/v1/users/:userId/mood/suggestion',
+            ...(fetchMiddlewares<RequestHandler>(GetEmojiSuggestionsController)),
+            ...(fetchMiddlewares<RequestHandler>(GetEmojiSuggestionsController.prototype.handlerFunc)),
+
+            function GetEmojiSuggestionsController_handlerFunc(request: any, response: any, next: any) {
+            const args = {
+                    token: {"in":"header","name":"X-Access-Token","required":true,"dataType":"string"},
+                    userId: {"in":"path","name":"userId","required":true,"dataType":"string"},
+                    text: {"in":"query","name":"text","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new GetEmojiSuggestionsController();
 
 
               const promise = controller.handlerFunc.apply(controller, validatedArgs as any);

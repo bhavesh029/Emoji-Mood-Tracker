@@ -7,7 +7,7 @@ import {
 import { RestrictedBaseController } from "@emojiTracker-js/milkyway-common";
 import { Get, Header, Query, Route, Tags } from "@tsoa/runtime";
 import * as dotenv from "dotenv";
-import { getMoodData, getUserMoodData } from "../../services/mood-services";
+import { getUserMoodData } from "../../services/mood-services";
 
 dotenv.config();
 
