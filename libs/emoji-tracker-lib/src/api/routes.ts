@@ -18,6 +18,8 @@ import { GetSharedDataController } from './controllers/sharing/get-shared-data-c
 import { ShareUserDataController } from './controllers/sharing/share-user-data-controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { GetPublicMoodController } from './controllers/public/get-public-mood-controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { GetUserEmojiUsageStatisticsController } from './controllers/statistics/get-user-emoji-usage-statistics-controller';
 import type { RequestHandler, Router } from 'express';
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -274,6 +276,33 @@ export function RegisterRoutes(app: Router) {
                 validatedArgs = getValidatedArgs(args, request, response);
 
                 const controller = new GetPublicMoodController();
+
+
+              const promise = controller.handlerFunc.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/v1/users/:userId/mood/stats',
+            ...(fetchMiddlewares<RequestHandler>(GetUserEmojiUsageStatisticsController)),
+            ...(fetchMiddlewares<RequestHandler>(GetUserEmojiUsageStatisticsController.prototype.handlerFunc)),
+
+            function GetUserEmojiUsageStatisticsController_handlerFunc(request: any, response: any, next: any) {
+            const args = {
+                    token: {"in":"header","name":"X-Access-Token","required":true,"dataType":"string"},
+                    userId: {"in":"path","name":"userId","required":true,"dataType":"string"},
+                    filter: {"in":"query","name":"filter","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new GetUserEmojiUsageStatisticsController();
 
 
               const promise = controller.handlerFunc.apply(controller, validatedArgs as any);

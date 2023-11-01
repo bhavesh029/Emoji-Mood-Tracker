@@ -6,7 +6,9 @@ import {
   deleteMood,
   getAllMonthMoodData,
   getAllTodayMoodData,
+  getMonthMoodData,
   getMonthlyMoodData,
+  getTodayMoodData,
   updateTodayMood,
 } from "@emojiTracker-js/data-access";
 
@@ -47,6 +49,20 @@ export function getPublicMoodData(ctx: MwDbContext, filter: string) {
     return getAllTodayMoodData(ctx);
   } else if (filter == "this-month") {
     return getAllMonthMoodData(ctx);
+  } else {
+    return UnsupportedFilterErrRes();
+  }
+}
+
+export function getUserMoodData(
+  ctx: MwDbContext,
+  filter: string,
+  userId: string
+) {
+  if (filter == "today") {
+    return getTodayMoodData(ctx, userId);
+  } else if (filter == "this-month") {
+    return getMonthMoodData(ctx, userId);
   } else {
     return UnsupportedFilterErrRes();
   }

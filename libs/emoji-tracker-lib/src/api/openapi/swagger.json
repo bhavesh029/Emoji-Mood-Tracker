@@ -424,6 +424,54 @@
 					}
 				]
 			}
+		},
+		"/users/{userId}/mood/stats": {
+			"get": {
+				"operationId": "HandlerFunc",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessResponse_MoodStats-Array_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "get user's mood\nfilter with today, this-month",
+				"tags": [
+					"Statistics"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "filter",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
 		}
 	},
 	"servers": [
