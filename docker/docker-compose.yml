@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  emoji_tracker_postgres:
+    image: postgis/postgis:15-3.3
+    container_name: mw-postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=bhavesh
+      - POSTGRES_PASSWORD=bhavesh
+      - TZ=Asia/Kolkata
+    logging:
+      options:
+        max-size: 10m
+        max-file: '3'
+    expose:
+      - '6432'
+    ports:
+      - '6432:6432'
+    volumes:
+      - ../.db-sqls:/docker-entrypoint-initdb.d
+
+
+    networks:
+      - db
+    command: -p 6432
+
+networks:
+  db:
+    name: emoji_tracker_postgres

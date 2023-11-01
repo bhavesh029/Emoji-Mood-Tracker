@@ -1,0 +1,38 @@
+{
+  "spec": {
+    "title": "emoji-tracker Application API Document",
+    "specVersion": 3,
+    "license": "emojiTracker Technologies Pvt. Ltd.",
+    "version": "v1.0.0",
+    "basePath": "/v1",
+    "outputDirectory": "libs/emoji-tracker-lib/src/api/openapi/",
+    "entryFile": "apps/emoji-tracker/src/app/main.ts",
+    "schemes": ["http"],
+    "spec": {
+      "servers": [
+        {
+          "url": "http://localhost:3334/v1",
+          "description": "Local Env"
+        }
+      ]
+    }
+  },
+  "routes": {
+    "basePath": "/v1",
+    "routesDir": "libs/emoji-tracker-lib/src/api",
+    "middleware": "express"
+  },
+  "entryFile": "apps/emoji-tracker/src/app/main.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": [
+    "libs/emoji-tracker-lib/src/api/controllers/app-store-redirector/*.ts"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@emojiTracker-js/data-access": ["libs/data-access/src/index"],
+      "@emojiTracker-js/milkyway-common": ["libs/milkyway-common/src/index"],
+      "@emojiTracker-js/emoji-tracker-lib": ["libs/emoji-tracker-lib/src/index"]
+    }
+  }
+}

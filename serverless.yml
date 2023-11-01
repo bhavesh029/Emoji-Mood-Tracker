@@ -1,0 +1,56 @@
+service: emojiTracker-mw-products
+frameworkVersion: '3'
+configValidationMode: warn
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev-27-june
+  region: ap-south-1
+  timeout: 30
+  memorySize: 512
+  iamManagedPolicies:
+    - "arn:aws:iam::834534110091:policy/emojiTrackerSESPublish"
+    - "arn:aws:iam::834534110091:policy/emojiTrackerSNSPublish"
+    - "arn:aws:iam::834534110091:policy/emojiTrackerDevLambda"
+    - "arn:aws:iam::834534110091:policy/emojiTrackerDevS3Policy"
+    
+  vpc:
+    securityGroupIds:
+     -  sg-0fb7520ad9c549cff
+    subnetIds:
+      - subnet-076377af58b0204e9
+
+package:
+  individually: true
+
+functions:
+  api:
+    handler: apps/mw-app/src/app/lambda-mw-app.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+
+custom:
+  dotenv:
+     exclude:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_SESSION_TOKEN
+      - AWS_REGION
+      
+  webpack:
+    webpackConfig: 'webpack.config.js' # Name of webpack configuration file
+    includeModules: true # Node modules configuration for packaging
+    excludeFiles: src/**/*.test.js
+ 
+  customDomain:
+    domainName: dev-api.emojiTracker.com
+    basePath: ''
+    stage: ${self:provider.stage}
+    createRoute53Record: false  
+  
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-webpack
+  - serverless-domain-manager

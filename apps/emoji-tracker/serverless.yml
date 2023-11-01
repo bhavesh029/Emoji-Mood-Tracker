@@ -1,0 +1,16 @@
+service: emojiTracker-aws-node-express-api
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  api:
+    handler: src/index.hanlder
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-webpack
