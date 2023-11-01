@@ -5,20 +5,9 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "build-iam-sql": "npx ts-node devops/scripts/iam-handler/generate-iam-sqls-script.ts",
     "build-routes": "npx tsoa spec-and-routes --configuration libs/emoji-tracker-lib/tsoa.json --host localhost:3334",
     "start-server": "npx ts-node apps/mw-app/src/app/main.ts",
-    "lambda-deploy-local": "npx serverless invoke local --function api",
-    "generate-env": "npx ts-node devops/scripts/env-handler/setup-env.ts --env",
-    "generate-ctrl-ctx": "npx ts-node devops/scripts/ctx-handler/get-ctrl-ctx-from-db.ts --env dev,prod,test,integration-test",
-    "setup-docker": "sh devops/scripts/docker-handler/compose-docker.sh",
-    "deploy-dev-product": "sh devops/scripts/ci-cd/deployment/lambda-deployment/deploy-to-lambda.sh dev product",
-    "deploy-dev-scripts": "sh devops/scripts/ci-cd/deployment/lambda-deployment/deploy-to-lambda.sh dev scripts",
-    "deploy-prod-product": "sh devops/scripts/ci-cd/deployment/lambda-deployment/deploy-to-lambda.sh prod product",
-    "deploy-prod-scripts": "sh devops/scripts/ci-cd/deployment/lambda-deployment/deploy-to-lambda.sh prod scripts",
-    "migrate-db-dev": "sh devops/scripts/db-handler/migrate-db.sh dev",
-    "migrate-db-prod": "sh devops/scripts/db-handler/migrate-db.sh prod",
-    "generate-exotel-token": "npx ts-node devops/scripts/iam-handler/generate-phone-no-call-mappings-get-api-token.ts"
+    "setup-docker": "sh devops/scripts/docker-handler/compose-docker.sh"
   },
   "engines": {
     "npm": "=9.3.1",
