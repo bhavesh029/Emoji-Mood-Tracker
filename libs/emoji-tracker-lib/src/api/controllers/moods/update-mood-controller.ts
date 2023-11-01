@@ -2,6 +2,7 @@
 import {
   CreatedSuccessfullyStatus,
   MoodInfo,
+  NoContentStatus,
 } from "@emojiTracker-js/data-access";
 import { UnRestrictedBaseController } from "@emojiTracker-js/milkyway-common";
 import { Body, Put, Query, Route, Tags } from "@tsoa/runtime";
@@ -17,7 +18,7 @@ dotenv.config();
  * Handle all the details about the User's Mood
  */
 export class UpdateMoodController extends UnRestrictedBaseController<void> {
-  override successStatusCode = CreatedSuccessfullyStatus;
+  override successStatusCode = NoContentStatus;
   constructor() {
     super();
   }

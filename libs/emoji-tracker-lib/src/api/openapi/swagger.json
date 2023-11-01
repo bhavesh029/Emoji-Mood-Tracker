@@ -34,6 +34,39 @@
 					"mood"
 				],
 				"type": "object"
+			},
+			"MoodStats": {
+				"properties": {
+					"note": {
+						"type": "string"
+					},
+					"moodCounts": {
+						"type": "string"
+					},
+					"emoji": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"moodCounts",
+					"emoji"
+				],
+				"type": "object"
+			},
+			"SuccessResponse_MoodStats-Array_": {
+				"properties": {
+					"response": {
+						"items": {
+							"$ref": "#/components/schemas/MoodStats"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"response"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -107,6 +140,75 @@
 						}
 					}
 				}
+			},
+			"delete": {
+				"operationId": "HandlerFunc",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"summary": "delete user's mood",
+				"tags": [
+					"Moods"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "moodId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"get": {
+				"operationId": "HandlerFunc",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessResponse_MoodStats-Array_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "get user's mood\nfilter with this-month, previous-month, last-month",
+				"tags": [
+					"Moods"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "filter",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			},
 			"put": {
 				"operationId": "HandlerFunc",
