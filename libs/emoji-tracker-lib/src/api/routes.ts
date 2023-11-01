@@ -9,19 +9,9 @@ import type { RequestHandler, Router } from 'express';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
-    "UsersAttributes": {
-        "dataType": "refObject",
-        "properties": {
-            "id": {"dataType":"string","required":true},
-            "username": {"dataType":"string","required":true},
-            "email": {"dataType":"string","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UsersCreationAttributes": {
+    "AddUserReqBody": {
         "dataType": "refAlias",
-        "type": {"ref":"UsersAttributes","validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"email":{"dataType":"string","required":true},"username":{"dataType":"string","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
@@ -40,7 +30,7 @@ export function RegisterRoutes(app: Router) {
 
             function AddUserController_handlerFunc(request: any, response: any, next: any) {
             const args = {
-                    info: {"in":"body","name":"info","required":true,"ref":"UsersCreationAttributes"},
+                    info: {"in":"body","name":"info","required":true,"ref":"AddUserReqBody"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

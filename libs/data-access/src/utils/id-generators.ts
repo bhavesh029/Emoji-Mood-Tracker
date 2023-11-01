@@ -1,6 +1,6 @@
 import ShortUniqueId from "short-unique-id";
 
-export function generateuserId() {
+export function generateUserId() {
   const codePrefix = new ShortUniqueId({
     length: 4,
     dictionary: "alpha_upper",

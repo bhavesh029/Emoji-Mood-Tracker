@@ -8,10 +8,13 @@ import {
   SuccessResponse,
   UsersCreationAttributes,
   CreatedSuccessfullyStatus,
+  generateCustomerId,
+  generateUserId,
 } from "@emojiTracker-js/data-access";
 import { UnRestrictedBaseController } from "@emojiTracker-js/milkyway-common";
 import { Route, Tags, Put, Header, Body } from "@tsoa/runtime";
 import { addUser } from "../../services/user-services";
+import { AddUserReqBody } from "../../models/add-user-req-body";
 
 dotenv.config();
 
@@ -31,9 +34,14 @@ export class AddUserController extends UnRestrictedBaseController<void> {
    *
    */
   @Put("/user/add")
-  handlerFunc(@Body() info: UsersCreationAttributes): Promise<void> {
+  handlerFunc(@Body() info: AddUserReqBody): Promise<void> {
     return this.controllerWrapper(() => {
-      return addUser(this.mwCtx, info);
+      const userInfo: UsersCreationAttributes = {
+        id: generateUserId(),
+        username: info.username,
+        email: info.email,
+      };
+      return addUser(this.mwCtx, userInfo);
     }).then(this.returnNoContent());
   }
 }

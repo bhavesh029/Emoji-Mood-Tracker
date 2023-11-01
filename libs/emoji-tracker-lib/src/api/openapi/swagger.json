@@ -6,28 +6,20 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"UsersAttributes": {
+			"AddUserReqBody": {
 				"properties": {
-					"id": {
+					"email": {
 						"type": "string"
 					},
 					"username": {
 						"type": "string"
-					},
-					"email": {
-						"type": "string"
 					}
 				},
 				"required": [
-					"id",
-					"username",
-					"email"
+					"email",
+					"username"
 				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"UsersCreationAttributes": {
-				"$ref": "#/components/schemas/UsersAttributes"
+				"type": "object"
 			}
 		},
 		"securitySchemes": {}
@@ -61,7 +53,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UsersCreationAttributes"
+								"$ref": "#/components/schemas/AddUserReqBody"
 							}
 						}
 					}
