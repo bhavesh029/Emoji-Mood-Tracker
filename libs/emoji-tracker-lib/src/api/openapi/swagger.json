@@ -5,50 +5,67 @@
 		"parameters": {},
 		"requestBodies": {},
 		"responses": {},
-		"schemas": {},
+		"schemas": {
+			"UsersAttributes": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"username",
+					"email"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UsersCreationAttributes": {
+				"$ref": "#/components/schemas/UsersAttributes"
+			}
+		},
 		"securitySchemes": {}
 	},
 	"info": {
 		"title": "emoji-tracker",
 		"version": "v1.0.0",
 		"license": {
-			"name": "emojiTracker Technologies Pvt. Ltd."
+			"name": "emojiTracker"
 		},
 		"contact": {}
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/marketing/app-store-redirector/{applicationId}": {
-			"get": {
+		"/users/user/add": {
+			"put": {
 				"operationId": "HandlerFunc",
 				"responses": {
-					"302": {
-						"description": "Redirect"
+					"204": {
+						"description": "No content"
 					}
 				},
-				"summary": "User sending mail to support for any queries",
+				"summary": "create new user",
 				"tags": [
-					"App Store"
+					"Users"
 				],
 				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "applicationId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"in": "query",
-						"name": "source",
-						"required": false,
-						"schema": {
-							"type": "string"
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UsersCreationAttributes"
+							}
 						}
 					}
-				]
+				}
 			}
 		}
 	},

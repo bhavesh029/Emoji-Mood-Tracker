@@ -1,0 +1,2 @@
+libs/data-access/sql/v1.0.0/v1.0.0-03-mw-ddl.sql
+libs/data-access/sql/v99.99.999-ddl.sql

@@ -1,5 +1,5 @@
-\c $db;
-set schema '$schema';
+\c postgres;
+set schema 'emoji_tracker_app';
 
 -- Create the Users table
 CREATE TABLE users (

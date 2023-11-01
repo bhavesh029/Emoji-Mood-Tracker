@@ -24,9 +24,8 @@ export function getConnectionDbCtx(): Promise<DbContext> {
 export function getSequelize(): DbContext {
   const url = process.env.DATABASE_URL;
   const dbSchema = process.env.DB_SCHEMA;
-  const timezone = process.env.TIMEZONE;
 
-  if (url == undefined || dbSchema == undefined || timezone == undefined) {
+  if (url == undefined || dbSchema == undefined) {
     throw new Error("All required db properties are not provided");
   }
 
@@ -34,7 +33,6 @@ export function getSequelize(): DbContext {
 
   const conn = new Sequelize(url, {
     dialectModule: pg,
-    timezone: timezone,
     schema: dbSchema,
     // retry: { max: 10, timeout: 3000 },
     pool: {

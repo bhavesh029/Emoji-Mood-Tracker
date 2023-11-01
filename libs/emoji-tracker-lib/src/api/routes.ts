@@ -3,12 +3,27 @@
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, HttpStatusCodeLiteral, TsoaResponse, fetchMiddlewares } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { QrRedirectorController } from './controllers/app-store-redirector/app-store-redirector-controller';
+import { AddUserController } from './controllers/users/add-user-controller';
 import type { RequestHandler, Router } from 'express';
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
+    "UsersAttributes": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"string","required":true},
+            "username": {"dataType":"string","required":true},
+            "email": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UsersCreationAttributes": {
+        "dataType": "refAlias",
+        "type": {"ref":"UsersAttributes","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
 const validationService = new ValidationService(models);
 
@@ -19,15 +34,13 @@ export function RegisterRoutes(app: Router) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-        app.get('/v1/marketing/app-store-redirector/:applicationId',
-            ...(fetchMiddlewares<RequestHandler>(QrRedirectorController)),
-            ...(fetchMiddlewares<RequestHandler>(QrRedirectorController.prototype.handlerFunc)),
+        app.put('/v1/users/user/add',
+            ...(fetchMiddlewares<RequestHandler>(AddUserController)),
+            ...(fetchMiddlewares<RequestHandler>(AddUserController.prototype.handlerFunc)),
 
-            function QrRedirectorController_handlerFunc(request: any, response: any, next: any) {
+            function AddUserController_handlerFunc(request: any, response: any, next: any) {
             const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    applicationId: {"in":"path","name":"applicationId","required":true,"dataType":"string"},
-                    source: {"in":"query","name":"source","dataType":"string"},
+                    info: {"in":"body","name":"info","required":true,"ref":"UsersCreationAttributes"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -36,11 +49,11 @@ export function RegisterRoutes(app: Router) {
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
 
-                const controller = new QrRedirectorController();
+                const controller = new AddUserController();
 
 
               const promise = controller.handlerFunc.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 302, next);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }

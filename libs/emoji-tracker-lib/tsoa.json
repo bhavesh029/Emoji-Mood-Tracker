@@ -2,7 +2,7 @@
   "spec": {
     "title": "emoji-tracker Application API Document",
     "specVersion": 3,
-    "license": "emojiTracker Technologies Pvt. Ltd.",
+    "license": "emojiTracker",
     "version": "v1.0.0",
     "basePath": "/v1",
     "outputDirectory": "libs/emoji-tracker-lib/src/api/openapi/",
@@ -25,7 +25,7 @@
   "entryFile": "apps/emoji-tracker/src/app/main.ts",
   "noImplicitAdditionalProperties": "throw-on-extras",
   "controllerPathGlobs": [
-    "libs/emoji-tracker-lib/src/api/controllers/app-store-redirector/*.ts"
+    "libs/emoji-tracker-lib/src/api/controllers/users/*.ts"
   ],
   "compilerOptions": {
     "baseUrl": ".",
