@@ -107,9 +107,10 @@ GROUP BY emoji`,
     .then((res) => handleFindAllWithEmpty(res))
     .then((returnVal) => {
       return returnVal.map((res) => {
+        console.log("mood pub data", res);
         let mapInfo: MoodStats = {
           emoji: res["emoji"],
-          moodCounts: res["mood_counts"],
+          moodCounts: res["mood_count"],
         };
 
         return mapInfo;
