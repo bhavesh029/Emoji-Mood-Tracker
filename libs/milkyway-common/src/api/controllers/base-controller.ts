@@ -19,16 +19,10 @@ export abstract class BaseController extends Controller {
   skipStateCheck = false;
 
   getCtx(): Promise<DbContext> {
-    return (
-      getConnectionDbCtx()
-        // .then((dbCtx) =>
-        // prepMwCtx(dbCtx, this.setTables(dbCtx.conn), this.ctrlCtx)
-        // )
-        .then((mwCtx) => {
-          this.mwCtx = mwCtx;
-          return mwCtx;
-        })
-    );
+    return getConnectionDbCtx().then((mwCtx) => {
+      this.mwCtx = mwCtx;
+      return mwCtx;
+    });
   }
 
   protected controllerExecutor<T>(
@@ -41,25 +35,6 @@ export abstract class BaseController extends Controller {
       return s;
     });
   }
-
-  // protected handleState<T>(
-  //   applicationId: number,
-  //   res?: T
-  // ): Promise<SuccessResponse<T> | void> {
-  //   return this.getCtx()
-  //     .then((stateChangedTo) => {
-  //       if (res != undefined) {
-  //         const s: SuccessResponse<T> = {
-  //           response: res,
-  //         };
-  //         return s;
-  //       } else {
-  //         return;
-  //       }
-  //     })
-  //     .catch((e) => this.handleCtrlError(e))
-  //     .finally(() => this.closeDbConn());
-  // }
 
   returnNoContent(): () => void {
     return () => {
